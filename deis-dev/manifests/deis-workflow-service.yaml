@@ -5,11 +5,6 @@ metadata:
   namespace: deis
   labels:
     heritage: deis
-    routable: "true"
-  annotations:
-    router.deis.io/domains: deis
-    router.deis.io/connectTimeout: "10"
-    router.deis.io/tcpTimeout: "1200"
 spec:
   ports:
     - name: http

@@ -31,23 +31,29 @@ spec:
             initialDelaySeconds: 30
             timeoutSeconds: 1
           env:
+            - name: DEIS_DATABASE_SERVICE_HOST
+              value: 
             - name: DEIS_DATABASE_USER
               value: deis
             - name: DEIS_DATABASE_PASSWORD
               value: changeme123
+            - name: DEIS_REGISTRY_SERVICE_HOST
+              value: 
+            - name: DEIS_REGISTRY_SERVICE_PORT
+              value: 5000
           ports:
             - containerPort: 8000
               name: http
           volumeMounts:
-            - mountPath: /var/run/docker.sock
-              name: docker-socket
+            - name: docker-builder-socket
+              mountPath: /var/run/docker.sock
             - name: minio-user
               mountPath: /var/run/secrets/deis/minio/user
               readOnly: true
       volumes:
-        - name: docker-socket
+        - name: docker-builder-socket
           hostPath:
-            path: /var/run/docker.sock
+            path: /var/run/docker-builder.sock
         - name: minio-user
           secret:
             secretName: minio-user

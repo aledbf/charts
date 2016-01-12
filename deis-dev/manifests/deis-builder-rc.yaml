@@ -37,7 +37,13 @@ spec:
             - name: minio-user
               mountPath: /var/run/secrets/object/store
               readOnly: true
+            - name: docker-builder-socket
+              mountPath: /var/run/docker.sock
+              readOnly: true
       volumes:
         - name: minio-user
           secret:
             secretName: minio-user
+        - name: docker-builder-socket
+          hostPath:
+            path: /var/run/docker-builder.sock
